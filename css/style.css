@@ -112,3 +112,10 @@ a.navbar-brand.brand-title{
    
 }
 
+
+
+.alerts-pos{
+    position: fixed;
+    top: 25%;
+    width: auto;
+}

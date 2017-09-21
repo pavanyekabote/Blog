@@ -1,7 +1,19 @@
 <?php
     
+    
     include_once('./php/constants.php');
+    include_once('./php/db_util.php');
+    session_start();
     $TITLE = Constants::$TITLE;
+    if(!empty($_POST)){
+        $util = new DBUtil();
+        $usn = $_POST['usn'];
+        $pwd = $_POST['pwd'];
+        if( ( $key = $util->checkLogin($usn,$pwd)) != null )
+            Component::showAlert("LogIn success");
+        
+            
+    }
 ?>
     <!doctype html>
     <html>
@@ -66,22 +78,22 @@
 
                             </div>
                             <div class="modal-body">
-                               
+
 
                                 <form class="form-inline">
-  <div class="form-group">
-    <label class="sr-only" for="email">Email address:</label>
-    <input type="email" class="form-control" id="email">
-  </div>
-  <div class="form-group">
-    <label class="sr-only" for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="email">Email address:</label>
+                                        <input type="email" class="form-control" id="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="pwd">Password:</label>
+                                        <input type="password" class="form-control" id="pwd">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"> Remember me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -129,17 +141,18 @@
                 <div id="login" class="col-md-5">
                     <br />
                     <h3>Credentials here</h3><br />
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                    <form id="myForm">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <input type="text" class="form-control" name="usn" id="username" placeholder="Username" aria-describedby="basic-addon1">
 
-                    </div><br />
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1" style="font-size: 20px;font-weight: bold;">*</span>
-                        <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
-                    </div><br />
-                    <input type="submit" value="Login" class="btn btn-default btn-success" style="width:100%;">
-
+                        </div><br />
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1" style="font-size: 20px;font-weight: bold;">*</span>
+                            <input type="password" name="pwd" id="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                        </div><br />
+                        <input type="button" id="loginBtn" value="Login" class="btn btn-default btn-success" style="width:100%;">
+                    </form>
                 </div>
 
             </div>

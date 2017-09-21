@@ -27,5 +27,12 @@ $(document).ready(()=>{
            $('.navbar-collapse .navbar-nav > li > a').css('color','#000');
            
        }
-   }); 
+   });
+    
+    $("#loginBtn").click((e)=>{
+        
+        $("#myForm").attr('action','index.php');
+        $('#myForm').attr('method','post');
+        $('#myForm').submit();
+    });
 });
